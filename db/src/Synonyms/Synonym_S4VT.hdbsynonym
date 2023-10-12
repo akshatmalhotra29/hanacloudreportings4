@@ -1,0 +1,14 @@
+{
+  "SYN_VBAK": {
+    "target": {
+      "object": "VT_VBAK",
+      "schema": "TEST_SCHEMA"
+    }
+  },
+  "SYN_VBAP": {
+    "target": {
+      "object": "VT_VBAP",
+      "schema": "TEST_SCHEMA"
+    }
+  }
+}

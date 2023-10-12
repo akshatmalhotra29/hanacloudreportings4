@@ -1,0 +1,22 @@
+{
+    "TEST_SCHEMA_SRV": {
+    "object_owner": {
+        "schema_privileges" : [
+            {
+              "schema" : "TEST_SCHEMA",   // optional; override schema defined in grantor service
+              "privileges" : [ "INSERT", "UPDATE" ],
+              "privileges_with_grant_option" : [ "SELECT" ,"SELECT CDS METADATA","SELECT METADATA","EXECUTE"]
+            }
+          ]
+    },
+    "application_user": {
+        "schema_privileges" : [
+            {
+              "schema" : "TEST_SCHEMA" ,  // optional; override schema defined in grantor service
+              "privileges" : [ "INSERT", "UPDATE" ],
+              "privileges_with_grant_option" : [ "SELECT" ,"SELECT CDS METADATA","SELECT METADATA","EXECUTE" ]
+            }
+          ]
+    }
+    }
+}
