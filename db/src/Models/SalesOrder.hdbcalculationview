@@ -4,11 +4,11 @@
 <localVariables/>
 <variableMappings/>
 <dataSources>
-  <DataSource id="SYN_VBAK">
-    <resourceUri>SYN_VBAK</resourceUri>
+  <DataSource id="PERS_VBAK">
+    <resourceUri>PERS_VBAK</resourceUri>
   </DataSource>
-  <DataSource id="SYN_VBAP">
-    <resourceUri>SYN_VBAP</resourceUri>
+  <DataSource id="PERS_VBAP">
+    <resourceUri>PERS_VBAP</resourceUri>
   </DataSource>
 </dataSources>
 <snapshotProcedures/>
@@ -22,7 +22,7 @@
       <viewAttribute id="NETWR"/>
     </viewAttributes>
     <calculatedViewAttributes/>
-    <input node="SYN_VBAK"/>
+    <input node="PERS_VBAK"/>
   </calculationView>
   <calculationView xsi:type="Calculation:ProjectionView" id="SalesDocItem">
     <viewAttributes>
@@ -35,9 +35,9 @@
       <viewAttribute id="NETWR"/>
     </viewAttributes>
     <calculatedViewAttributes/>
-    <input node="SYN_VBAP"/>
+    <input node="PERS_VBAP"/>
   </calculationView>
-  <calculationView xsi:type="Calculation:JoinView" id="Join_1" cardinality="C1_N" joinType="leftOuter">
+  <calculationView xsi:type="Calculation:JoinView" id="Join_1" cardinality="CN_1" joinType="leftOuter">
     <viewAttributes>
       <viewAttribute id="MANDT"/>
       <viewAttribute id="VBELN"/>
@@ -50,18 +50,18 @@
       <viewAttribute hidden="true" id="JOIN$VBELN$VBELN"/>
     </viewAttributes>
     <calculatedViewAttributes/>
+    <input node="SalesDocItem">
+      <mapping xsi:type="Calculation:AttributeMapping" target="POSNR" source="POSNR"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="NETWR_SDI" source="NETWR"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$MANDT$MANDT" source="MANDT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$VBELN$VBELN" source="VBELN"/>
+    </input>
     <input node="SalesDocHeader">
       <mapping xsi:type="Calculation:AttributeMapping" target="MANDT" source="MANDT"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="VBELN" source="VBELN"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="AUDAT" source="AUDAT"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="VKORG" source="VKORG"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="NETWR_SDH" source="NETWR"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$MANDT$MANDT" source="MANDT"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$VBELN$VBELN" source="VBELN"/>
-    </input>
-    <input node="SalesDocItem">
-      <mapping xsi:type="Calculation:AttributeMapping" target="POSNR" source="POSNR"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="NETWR_SDI" source="NETWR"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$MANDT$MANDT" source="MANDT"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$VBELN$VBELN" source="VBELN"/>
     </input>
@@ -99,7 +99,7 @@
       <measureMapping columnObjectName="Join_1" columnName="NETWR_SDI"/>
       <exceptionAggregationMetadata/>
     </measure>
-    <measure id="NETWR_SDH" order="6" aggregationType="sum" measureType="simple">
+    <measure id="NETWR_SDH" order="6" aggregationType="max" measureType="simple" engineAggregation="sum">
       <descriptions defaultDescription="NETWR"/>
       <measureMapping columnObjectName="Join_1" columnName="NETWR_SDH"/>
       <exceptionAggregationMetadata/>
@@ -127,13 +127,13 @@
       <upperLeftCorner x="100" y="205"/>
       <rectangleSize height="30" width="160"/>
     </shape>
-    <shape modelObjectName="SalesDocHeader" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+    <shape modelObjectName="SalesDocItem" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
       <upperLeftCorner x="20" y="30"/>
       <rectangleSize width="250"/>
     </shape>
-    <shape modelObjectName="SalesDocItem" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+    <shape modelObjectName="SalesDocHeader" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
       <upperLeftCorner x="320" y="30"/>
-      <rectangleSize width="142.703125"/>
+      <rectangleSize width="142"/>
     </shape>
   </shapes>
 </layout>
